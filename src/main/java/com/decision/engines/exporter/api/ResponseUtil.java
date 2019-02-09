@@ -34,4 +34,8 @@ public class ResponseUtil {
     public ResponseEntity<APIResponse> badRequestResponse(String errorMessage) {
         return buildResponse(APIStatus.ERR_BAD_REQUEST, errorMessage, HttpStatus.BAD_REQUEST);
     }
+
+    public ResponseEntity<APIResponse> unprocessableEntityResponse(String errorMessage) {
+        return buildResponse(APIStatus.UNPROCESSABLE_ENTITY, errorMessage, HttpStatus.UNPROCESSABLE_ENTITY);
+    }
 }

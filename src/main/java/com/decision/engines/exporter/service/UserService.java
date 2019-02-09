@@ -6,12 +6,12 @@ import com.decision.engines.exporter.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.HashSet;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class UserService {
@@ -25,21 +25,38 @@ public class UserService {
         this.addressService = addressService;
     }
 
-    public Set<User> getAllUsers() {
-        return new HashSet<>(userRepository.findAll());
+    public Page<User> getAllUsers(Pageable pageable) {
+        return userRepository.findAll(pageable);
     }
 
+    /**
+     * @param newUser
+     * @return if an user exists, then returns it
+     */
     private Optional<User> findOneObject(User newUser) {
-        ExampleMatcher matcher = ExampleMatcher.matching().withIgnorePaths("id", "created_at", "updated_at");
+        ExampleMatcher matcher = ExampleMatcher.matching().withIgnorePaths("id", "address", "created_at", "updated_at");
         Example<User> searchUser = Example.of(newUser, matcher);
         return userRepository.findOne(searchUser);
     }
 
+    /**
+     * This method first checks if there is an address in the table. If yes, then associates the address with the new user
+     * It also checks if the user exists. If yes, then updates the existing user with the new address.
+     *
+     * @param newUser
+     * @return newly created user
+     */
     @Transactional
     public User save(User newUser) {
         Address address = addressService.save(newUser.getAddress());
         newUser.setAddress(address);
-        return findOneObject(newUser).orElseGet(() -> userRepository.save(newUser));
+        Optional<User> optionalUser = findOneObject(newUser);
+        if (optionalUser.isPresent()) {
+            User updateUser = optionalUser.get();
+            updateUser.setAddress(address);
+            return userRepository.save(updateUser);
+        } else {
+            return userRepository.save(newUser);
+        }
     }
-
 }

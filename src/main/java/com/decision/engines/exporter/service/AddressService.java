@@ -5,11 +5,11 @@ import com.decision.engines.exporter.repository.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class AddressService {
@@ -21,8 +21,8 @@ public class AddressService {
         this.addressRepository = addressRepository;
     }
 
-    public Set<Address> getAllListedAddress() {
-        return new HashSet<>(addressRepository.findAll());
+    public Page<Address> getAllListedAddress(Pageable pageable) {
+        return addressRepository.findAll(pageable);
     }
 
     private Optional<Address> findOneObject(Address newAddress) {

@@ -42,7 +42,6 @@ public class User extends DateAudit {
         return id;
     }
 
-
     public String getFirstName() {
         return firstName;
     }
