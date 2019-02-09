@@ -3,6 +3,7 @@ package com.decision.engines.exporter.api;
 public enum APIStatus {
 
     OK(200, null),
+    ACCEPTED(201, "Accepted"),
     ERR_INTERNAL_SERVER(500, "Internal Error"),
     SQL_ERROR(501, "SQL Error"),
     NOT_FOUND(404, "Not Found"),

@@ -12,12 +12,16 @@ import java.util.Map;
 @Component
 public class ResponseUtil {
 
-    public ResponseEntity<APIResponse> buildResponse(APIStatus apiStatus, Object data, HttpStatus httpStatus) {
+    private ResponseEntity<APIResponse> buildResponse(APIStatus apiStatus, Object data, HttpStatus httpStatus) {
         return new ResponseEntity(new APIResponse(apiStatus, data), httpStatus);
     }
 
     public ResponseEntity<APIResponse> successResponse(Object data) {
         return buildResponse(APIStatus.OK, data, HttpStatus.OK);
+    }
+
+    public ResponseEntity<APIResponse> acceptedResponse(Object data) {
+        return buildResponse(APIStatus.ACCEPTED, data, HttpStatus.ACCEPTED);
     }
 
     public ResponseEntity<APIResponse> badRequestResponse(List<ParamErrors> errors) {
@@ -38,4 +42,6 @@ public class ResponseUtil {
     public ResponseEntity<APIResponse> unprocessableEntityResponse(String errorMessage) {
         return buildResponse(APIStatus.UNPROCESSABLE_ENTITY, errorMessage, HttpStatus.UNPROCESSABLE_ENTITY);
     }
+
+
 }

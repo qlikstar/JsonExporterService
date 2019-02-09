@@ -1,9 +1,14 @@
+You may also try to go to this URL and try out using swagger-ui.
+```
+http://{host-name}:{port}/swagger-ui.html#/
+```
+
+Requests:
+
 ``` 
 curl -X POST \
   http://localhost:9000/api/v1/user \
   -H 'Content-Type: application/json' \
-  -H 'Postman-Token: 414ee5e2-0fa2-4be4-af71-ad402276fead' \
-  -H 'cache-control: no-cache' \
   -d '{
 
     "firstName": "Sanket",

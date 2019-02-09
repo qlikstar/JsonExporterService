@@ -15,16 +15,27 @@ import java.util.Optional;
 public class AddressService {
 
     private AddressRepository addressRepository;
+    private AddressVerificationService addressVerificationService;
 
     @Autowired
-    public AddressService(AddressRepository addressRepository) {
+    public AddressService(AddressRepository addressRepository,
+                          AddressVerificationService addressVerificationService) {
         this.addressRepository = addressRepository;
+        this.addressVerificationService = addressVerificationService;
     }
 
+    /**
+     * @param pageable
+     * @return all the pageable data from the repository
+     */
     public Page<Address> getAllListedAddress(Pageable pageable) {
         return addressRepository.findAll(pageable);
     }
 
+    /**
+     * @param newAddress
+     * @return an option of the address. Could be an address or it could be null.
+     */
     private Optional<Address> findOneObject(Address newAddress) {
         ExampleMatcher matcher = ExampleMatcher.matching().withIgnorePaths("id", "created_at", "updated_at");
         Example<Address> searchContact = Example.of(newAddress, matcher);
@@ -32,7 +43,20 @@ public class AddressService {
     }
 
     public Address save(Address newAddress) {
-        return findOneObject(newAddress).orElseGet(() -> addressRepository.save(newAddress));
+        return findOneObject(newAddress).orElseGet(() -> {
+            /**
+             * Makes a remote call to the address verification service. In this case USPS
+             */
+            if (addressVerificationService.verifyAddress(newAddress))
+                return addressRepository.save(newAddress);
+            else {
+                /**
+                 * If the service wasn't able to verify the address, make another call to get the Corrected address
+                 */
+                Address verifiedAddress = addressVerificationService.getCorrectedAddress(newAddress);
+                return addressRepository.save(verifiedAddress);
+            }
+        });
     }
 
 }
