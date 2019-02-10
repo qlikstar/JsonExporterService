@@ -9,7 +9,7 @@ One way choose to upload the data in one of the following methods:
 3. By using a JSON file and uploading the file using `/user/bulk/import` endpoint. 
 
 Using the method `1`, we can directly get back the results. Whereas, using method `2` and `3`, if the data
-is valid, the request gets `ACCEPTED` and the endpoint responds back with a Bulk JOB UUID and a status.
+is valid, the request gets `202:ACCEPTED` and the endpoint responds back with a Bulk JOB UUID and a status.
 This bulk job UUID can be queried later, to retrieve the status of the bulk job, using the following endpoint
 `/user/bulk/{UUID}`. 
 
@@ -78,7 +78,7 @@ curl -X POST \
 Response:
 
 {
-    "status": 200,
+    "status": 201,
     "data": {
         "id": 28,
         "firstName": "Sammy",
@@ -283,7 +283,7 @@ curl -X POST \
 Response:
 
 {
-    "status": 200,
+    "status": 202,
     "data": {
         "id": "90987b4c-4251-4ec5-a102-b0e57eae4a6",
         "jobStatus": "ACCEPTED",
@@ -298,7 +298,9 @@ Response:
 
 ```
 
-5. Create multiple users using the `/bulk/import` endpoint:
+5. Create multiple users using the `/bulk/import` endpoint. 
+In order to test it, you may choose to use the `Sampledata.json` under `src/main/resources/`.
+
 
 ```
 curl -X POST \
@@ -312,7 +314,7 @@ curl -X POST \
 Response:
 
 {
-    "status": 200,
+    "status": 202,
     "data": {
         "id": "60117b4c-4251-4ec5-a102-b0e57eae40e0",
         "jobStatus": "ACCEPTED",

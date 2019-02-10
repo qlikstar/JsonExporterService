@@ -19,6 +19,10 @@ public class ResponseUtil {
         return buildResponse(APIStatus.ACCEPTED, data, HttpStatus.ACCEPTED);
     }
 
+    public ResponseEntity<APIResponse> createdResponse(Object data) {
+        return buildResponse(APIStatus.CREATED, data, HttpStatus.CREATED);
+    }
+
     public ResponseEntity<APIResponse> badRequestResponse(String errorMessage) {
         return buildResponse(APIStatus.ERR_BAD_REQUEST, errorMessage, HttpStatus.BAD_REQUEST);
     }

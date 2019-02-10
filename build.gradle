@@ -47,9 +47,10 @@ dependencies {
     compile group: 'org.modelmapper', name: 'modelmapper', version: '2.3.0'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     //compileOnly 'org.projectlombok:lombok:1.16.8'
+    testCompile group: 'com.h2database', name: 'h2', version: '1.0.60'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
-    //testImplementation 'org.springframework.security:spring-security-test'
+    testImplementation 'org.springframework.security:spring-security-test'
 }
 
 task buildDocker(type: Docker, dependsOn: build) {

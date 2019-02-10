@@ -9,9 +9,9 @@ import com.decision.engines.exporter.enums.DataFormat;
 import com.decision.engines.exporter.enums.UploadType;
 import com.decision.engines.exporter.exception.ServiceException;
 import com.decision.engines.exporter.model.User;
-import com.decision.engines.exporter.service.BulkDataService;
-import com.decision.engines.exporter.service.FileStorageService;
-import com.decision.engines.exporter.service.UserService;
+import com.decision.engines.exporter.service.impl.BulkDataService;
+import com.decision.engines.exporter.service.impl.LocalFileStorageService;
+import com.decision.engines.exporter.service.impl.UserService;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,7 +57,7 @@ public class UserController {
     private ModelMapper modelMapper;
     private UserService userService;
     private BulkDataService bulkDataService;
-    private FileStorageService fileStorageService;
+    private LocalFileStorageService fileStorageService;
 
     @Value("${file.upload-dir}")
     private String uploadDir;
@@ -67,7 +67,7 @@ public class UserController {
                           ModelMapper modelMapper,
                           UserService userService,
                           BulkDataService bulkDataService,
-                          FileStorageService fileStorageService) {
+                          LocalFileStorageService fileStorageService) {
         this.responseUtil = responseUtil;
         this.modelMapper = modelMapper;
         this.userService = userService;
@@ -93,7 +93,7 @@ public class UserController {
     public ResponseEntity<APIResponse> postUser(@RequestBody UserDTO userDTO) {
         User user = modelMapper.map(userDTO, User.class);
         UserDTO userDTOResponse = modelMapper.map(userService.save(user), UserDTO.class);
-        return responseUtil.successResponse(userDTOResponse);
+        return responseUtil.createdResponse(userDTOResponse);
     }
 
     /**

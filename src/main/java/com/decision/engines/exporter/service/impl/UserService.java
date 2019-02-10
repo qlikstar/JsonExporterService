@@ -1,4 +1,4 @@
-package com.decision.engines.exporter.service;
+package com.decision.engines.exporter.service.impl;
 
 import com.decision.engines.exporter.dto.UserDTO;
 import com.decision.engines.exporter.model.Address;

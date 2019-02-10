@@ -1,4 +1,4 @@
-package com.decision.engines.exporter.service.serviceimpl;
+package com.decision.engines.exporter.service.impl;
 
 import com.decision.engines.exporter.model.Address;
 import com.decision.engines.exporter.service.AddressVerificationService;

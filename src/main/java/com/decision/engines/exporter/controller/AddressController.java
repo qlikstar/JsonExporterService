@@ -4,7 +4,7 @@ import com.decision.engines.exporter.api.APIName;
 import com.decision.engines.exporter.api.APIResponse;
 import com.decision.engines.exporter.api.ResponseUtil;
 import com.decision.engines.exporter.model.Address;
-import com.decision.engines.exporter.service.AddressService;
+import com.decision.engines.exporter.service.impl.AddressService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +51,6 @@ public class AddressController {
     @RequestMapping(path = APIName.ADDRESS, method = RequestMethod.POST)
     public ResponseEntity<APIResponse> postAddress(@RequestBody Address address) {
         LOG.info("Address : " + address);
-        return responseUtil.successResponse(addressService.save(address));
+        return responseUtil.createdResponse(addressService.save(address));
     }
 }
