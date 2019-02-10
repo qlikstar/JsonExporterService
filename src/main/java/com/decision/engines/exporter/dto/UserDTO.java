@@ -2,6 +2,10 @@ package com.decision.engines.exporter.dto;
 
 import java.time.Instant;
 
+/**
+ * This data object takes in the request from the API endpoint.
+ * However, this record is split into 1. User 2. Address and saved into relavant tables in the DB.
+ */
 public class UserDTO {
 
     private Long id;

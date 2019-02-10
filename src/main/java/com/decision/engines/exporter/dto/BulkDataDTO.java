@@ -5,6 +5,9 @@ import com.decision.engines.exporter.enums.JobStatus;
 import java.io.Serializable;
 import java.util.UUID;
 
+/**
+ * This is a Data Transfer Object for Bulk Endpoints
+ */
 public class BulkDataDTO implements Serializable {
     private UUID id;
 

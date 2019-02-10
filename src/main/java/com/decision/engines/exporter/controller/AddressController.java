@@ -15,6 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * This is a REST controller for Address.
+ * Currently, there is no provision to delete an entity.
+ * However, all the save operations guarantee that there is always 1 unique record for the address.
+ */
 @RestController
 @RequestMapping(APIName.API_VERSION)
 public class AddressController {
@@ -30,11 +35,19 @@ public class AddressController {
         this.addressService = addressService;
     }
 
+    /**
+     * @param pageable
+     * @return a list of pageable addresses
+     */
     @RequestMapping(path = APIName.ADDRESS, method = RequestMethod.GET)
     public ResponseEntity<APIResponse> getAddress(Pageable pageable) {
         return responseUtil.successResponse(addressService.getAllListedAddress(pageable));
     }
 
+    /**
+     * @param address
+     * @return the saved address with the relavant info like the id and the created and modified dates
+     */
     @RequestMapping(path = APIName.ADDRESS, method = RequestMethod.POST)
     public ResponseEntity<APIResponse> postAddress(@RequestBody Address address) {
         LOG.info("Address : " + address);

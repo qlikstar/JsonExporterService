@@ -30,6 +30,12 @@ public class UserService {
         this.addressService = addressService;
     }
 
+    /**
+     * This method returns the list of pageable users to the API caller
+     *
+     * @param pageable
+     * @return pages of users
+     */
     public Page<UserDTO> getAllUsers(Pageable pageable) {
         List<User> userList = userRepository.findAll(pageable).getContent();
         List<UserDTO> userDTOList = userList.stream()

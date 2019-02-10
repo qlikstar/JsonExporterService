@@ -3,6 +3,14 @@ package com.decision.engines.exporter.dto;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Job Result DTO holds the following:
+ * 1. No of records in the request
+ * 2. No of records successfully processed
+ * 3. No of records that failed to be processed with the error message
+ * 4. Status of the job.
+ */
+
 public class JobResultDTO implements Serializable {
     private Integer totalNoOfObjects;
     private Integer numberOfObjectsProcessed;

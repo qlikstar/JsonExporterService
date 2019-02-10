@@ -1,5 +1,6 @@
 package com.decision.engines.exporter.model;
 
+import com.decision.engines.exporter.model.audit.DateAudit;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

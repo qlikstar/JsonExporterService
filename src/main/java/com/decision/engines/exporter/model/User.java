@@ -1,5 +1,7 @@
 package com.decision.engines.exporter.model;
 
+import com.decision.engines.exporter.model.audit.DateAudit;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;

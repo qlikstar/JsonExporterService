@@ -5,6 +5,9 @@ import com.decision.engines.exporter.service.AddressVerificationService;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
+/**
+ * This is a dummy Address Verification Service that validates the address from an external service
+ */
 @Primary
 @Service
 public class USPSAddressVerificationService implements AddressVerificationService {

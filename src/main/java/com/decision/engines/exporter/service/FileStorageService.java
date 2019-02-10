@@ -34,6 +34,12 @@ public class FileStorageService {
         }
     }
 
+    /**
+     * This method stores the file in the File system
+     *
+     * @param file
+     * @return the filename as string
+     */
     public String storeFile(MultipartFile file) {
         // Normalize file name
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());

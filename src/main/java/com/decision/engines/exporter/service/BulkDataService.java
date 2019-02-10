@@ -47,6 +47,12 @@ public class BulkDataService {
         this.modelMapper = modelMapper;
     }
 
+    /**
+     * Reads the JSON file and returns the contents as List of User DTO for further processing
+     *
+     * @param filePath
+     * @return the list of User DTOs
+     */
     private static List<UserDTO> readFileDataFromJson(String filePath) {
         StringBuilder contentBuilder = new StringBuilder();
         List<UserDTO> userDTOlist = new ArrayList<>();
@@ -61,14 +67,33 @@ public class BulkDataService {
         return userDTOlist;
     }
 
+    /**
+     * This method returns the details of the bulk request UUID.
+     *
+     * @param id
+     * @return the details of the bulk request UUID.
+     */
     public Bulk findBulkByUUID(UUID id) {
         return bulkRepository.findById(id);
     }
 
+    /**
+     * This method saves the bulk data in the DB
+     *
+     * @param bulk
+     * @return saved Bulk record
+     */
     public Bulk save(Bulk bulk) {
         return bulkRepository.save(bulk);
     }
 
+    /**
+     * This method returns the details of the bulk request UUID.
+     *
+     * @param id
+     * @return the bulk job details
+     * @throws ServiceException if the requested Bulk job UUID is not found
+     */
     public BulkDataDTO findBulkByRequestedUUID(UUID id) throws ServiceException {
         Bulk bulk = bulkRepository.findById(id);
         if (bulk != null) {
@@ -78,8 +103,15 @@ public class BulkDataService {
         }
     }
 
+    /**
+     * This is a common method for processing both the 1. DataBlob requests and 2. File import requests
+     *
+     * @param userDTOs
+     * @param dataFormat
+     * @param uploadType
+     * @return the Bulk Job details
+     */
     public BulkDataDTO saveAndProcess(List<UserDTO> userDTOs, DataFormat dataFormat, UploadType uploadType) {
-
         // Gets the list of users from UserDTO
         List<User> users = userDTOs.stream()
                 .map(userDTO -> modelMapper.map(userDTO, User.class))
@@ -102,6 +134,15 @@ public class BulkDataService {
         return new BulkDataDTO(bulk.getId(), bulk.getJobStatus(), new Gson().fromJson(bulk.getResults(), JobResultDTO.class));
     }
 
+    /**
+     * This method is only called if it is a JSON file. It will extract the file contents and will map it
+     * as a list of User DTO. It also throws a Service Exception if it is unable to parse th file.
+     *
+     * @param filePath
+     * @param dataFormat
+     * @return
+     * @throws ServiceException
+     */
     public BulkDataDTO saveAndProcessFile(String filePath, DataFormat dataFormat) throws ServiceException {
 
         List<UserDTO> users = readDataFromFile(filePath, dataFormat);

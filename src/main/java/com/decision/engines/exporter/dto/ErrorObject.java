@@ -4,6 +4,10 @@ import com.decision.engines.exporter.model.User;
 
 import java.io.Serializable;
 
+/**
+ * This is the error object that holds the error with the error code and the error message.
+ * This is needed to track the errors, while processing the records in the background asynchronously.
+ */
 public class ErrorObject implements Serializable {
     private User user;
     private String error;
