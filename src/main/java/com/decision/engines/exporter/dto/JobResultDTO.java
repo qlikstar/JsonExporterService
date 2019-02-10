@@ -1,8 +1,9 @@
 package com.decision.engines.exporter.dto;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class JobResultDTO {
+public class JobResultDTO implements Serializable {
     private Integer totalNoOfObjects;
     private Integer numberOfObjectsProcessed;
     private Integer numberOfObjectsFailed;

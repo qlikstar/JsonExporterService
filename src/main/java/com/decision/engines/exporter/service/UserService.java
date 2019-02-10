@@ -1,32 +1,41 @@
 package com.decision.engines.exporter.service;
 
+import com.decision.engines.exporter.dto.UserDTO;
 import com.decision.engines.exporter.model.Address;
 import com.decision.engines.exporter.model.User;
 import com.decision.engines.exporter.repository.UserRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
 
+    private ModelMapper modelMapper;
     private UserRepository userRepository;
     private AddressService addressService;
 
     @Autowired
-    public UserService(UserRepository userRepository, AddressService addressService) {
+    public UserService(ModelMapper modelMapper,
+                       UserRepository userRepository,
+                       AddressService addressService) {
+        this.modelMapper = modelMapper;
         this.userRepository = userRepository;
         this.addressService = addressService;
     }
 
-    public Page<User> getAllUsers(Pageable pageable) {
-        return userRepository.findAll(pageable);
+    public Page<UserDTO> getAllUsers(Pageable pageable) {
+        List<User> userList = userRepository.findAll(pageable).getContent();
+        List<UserDTO> userDTOList = userList.stream()
+                .map(user -> modelMapper.map(user, UserDTO.class))
+                .collect(Collectors.toList());
+        return new PageImpl<>(userDTOList, pageable, userDTOList.size());
     }
 
     /**

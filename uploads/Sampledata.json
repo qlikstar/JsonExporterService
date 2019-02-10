@@ -1,0 +1,41 @@
+[
+    {
+        "firstName": "Pratik",
+        "lastName": "Vishnu",
+        "email": "pv@gmail.com",
+        "age": 21,
+        "additionalFields": null,
+        "streetAddress": "890 Willow Road",
+        "additionalAddress": "90",
+        "houseNo": null,
+        "city": "Hayward",
+        "stateCode": "CA",
+        "zipcode": 98709
+    },
+    {
+        "firstName": "Joel",
+        "lastName": "Mimmi",
+        "email": "jmm@gmail.com",
+        "age": 29,
+        "additionalFields": null,
+        "streetAddress": "654 Lawrence Avenuw",
+        "additionalAddress": "",
+        "houseNo": null,
+        "city": "San Francisco",
+        "stateCode": "CA",
+        "zipcode": 98169
+    },
+    {
+        "firstName": "Robin",
+        "lastName": "T",
+        "email": "robn@gmail.com",
+        "age": 19,
+        "additionalFields": null,
+        "streetAddress": "232 Walker St",
+        "additionalAddress": "",
+        "houseNo": null,
+        "city": "San Francis",
+        "stateCode": "CA",
+        "zipcode": 98709
+    }
+]

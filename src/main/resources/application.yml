@@ -6,12 +6,21 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+  servlet:
+    multipart:
+      enabled: true # Enable multipart uploads
+      file-size-threshold: 2KB # Threshold after which files are written to disk.
+      max-file-size: 20MB # Max file size.
+      max-request-size: 22MB # Max Request Size
 
   datasource:
     url: jdbc:mysql://localhost:3306/decisionsciences
     username: root
     password: password
     driverClassName: com.mysql.cj.jdbc.Driver
+
+file:
+  upload-dir: ./uploads
 
 server:
   port: 9000

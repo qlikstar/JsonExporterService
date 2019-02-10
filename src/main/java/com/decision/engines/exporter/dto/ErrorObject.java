@@ -2,7 +2,9 @@ package com.decision.engines.exporter.dto;
 
 import com.decision.engines.exporter.model.User;
 
-public class ErrorObject {
+import java.io.Serializable;
+
+public class ErrorObject implements Serializable {
     private User user;
     private String error;
 
@@ -12,5 +14,21 @@ public class ErrorObject {
     }
 
     public ErrorObject() {
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
     }
 }

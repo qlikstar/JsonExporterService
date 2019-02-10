@@ -37,7 +37,7 @@ public class Bulk extends DateAudit {
     @Enumerated(EnumType.STRING)
     private JobStatus jobStatus;
 
-    @Column
+    @Column(columnDefinition = "TEXT")
     private String results;
 
     public Bulk(DataFormat dataFormat, String data, UploadType uploadType, JobStatus jobStatus, String results) {
