@@ -1,5 +1,5 @@
-FROM java:8
+FROM openjdk:8
 VOLUME /tmp
-EXPOSE 8080
-ADD /build/libs/JsonExporterService-0.0.1-SNAPSHOT.jar spring-boot-docker-1.0.jar
-ENTRYPOINT ["java","-jar","spring-boot-docker-1.0.jar"]
+EXPOSE 9000
+ADD /build/libs/json-exporter-service.jar app.jar
+ENTRYPOINT ["java","-jar","app.jar"]

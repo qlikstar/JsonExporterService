@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  docker-mysql:
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=decisionsciences
+      - MYSQL_PASSWORD=password
+  json-exporter-service:
+    image: json-exporter-service:latest
+    depends_on:
+      - docker-mysql
+    ports:
+      - 9000:9000
+    environment:
+      - DATABASE_HOST=docker-mysql
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=password
+      - DATABASE_NAME=decisionsciences
+      - DATABASE_PORT=3306

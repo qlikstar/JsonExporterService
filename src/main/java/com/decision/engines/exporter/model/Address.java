@@ -1,15 +1,11 @@
 package com.decision.engines.exporter.model;
 
 import com.decision.engines.exporter.model.audit.DateAudit;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 
-@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "address")
-@Data
 public class Address extends DateAudit {
     /**
      *
@@ -34,10 +30,6 @@ public class Address extends DateAudit {
     private String stateCode;
     @Column
     private Integer zipcode;
-
-//    @OneToOne
-//    @MapsId
-//    private User user;
 
     public Address() {
     }
@@ -93,12 +85,4 @@ public class Address extends DateAudit {
     public void setZipcode(Integer zipcode) {
         this.zipcode = zipcode;
     }
-
-//    public User getUser() {
-//        return user;
-//    }
-//
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
 }

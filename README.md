@@ -1,4 +1,4 @@
-#### Introduction
+### Introduction
 
 This is a self-contained service that exposes a REST API endpoint to import files that can either
 be CSV, JSON or XML data files. Currently, this supports uploading JSON files only.
@@ -19,17 +19,39 @@ so that the thread serving the request is not blocked.
 The file `UserController.java` could be a good starting point.
 
 ### Steps to run:
-1. Setup Mysql
-2. Upload the data
-3. Run the Gradlew run
- 
+1. Install Docker on your machine.
+
+2. Clone the git repository and navigate into the directory.
+
+2. Run the latest version of MySQL as docker container:
+```
+docker run --name=docker-mysql --env="MYSQL_ROOT_PASSWORD=password"  \
+--env="MYSQL_PASSWORD=password" --env="MYSQL_DATABASE=decisionsciences" -d mysql:latest
+```
+
+3. Build the jar for the Spring boot application and then build the docker image:
+```
+./gradlew  build && docker build . -t json-exporter-service
+```
+
+4. Finally, run the Spring boot container in tandem with the MySQL container:
+```
+docker run -p 9000:9000 --name json-exporter-service --link docker-mysql:mysql -d json-exporter-service
+```
+
+5. You may choose to view the logs and see if the server has booted up:
+```
+docker logs json-exporter-service
+```
+
+
 ### Swagger UI 
 You may also try to go to this URL and try out using swagger-ui.
 ```
-http://{host-name}:{port}/swagger-ui.html#/
+http://localhost:9000/swagger-ui.html#/
 ```
 
-#### API Requests and Responses:
+### API Requests and Responses:
 
 1. Create an Address:
 

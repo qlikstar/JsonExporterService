@@ -4,13 +4,11 @@ import com.decision.engines.exporter.enums.DataFormat;
 import com.decision.engines.exporter.enums.JobStatus;
 import com.decision.engines.exporter.enums.UploadType;
 import com.decision.engines.exporter.model.audit.DateAudit;
-import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.UUID;
 
-@Data
 @Entity
 @Table(name = "bulk")
 public class Bulk extends DateAudit {
