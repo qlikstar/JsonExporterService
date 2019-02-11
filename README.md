@@ -19,27 +19,30 @@ so that the thread serving the request is not blocked.
 The file `UserController.java` could be a good starting point.
 
 ### Steps to run:
-1. Install Docker on your machine.
+1. Install `Docker` on your machine. And then install `gradle`.
 
 2. Clone the git repository and navigate into the directory.
+```
+cd JsonExporterService
+```
 
-2. Run the latest version of MySQL as docker container:
+3. Run the latest version of MySQL as docker container:
 ```
 docker run --name=docker-mysql --env="MYSQL_ROOT_PASSWORD=password"  \
 --env="MYSQL_PASSWORD=password" --env="MYSQL_DATABASE=decisionsciences" -d mysql:latest
 ```
 
-3. Build the jar for the Spring boot application and then build the docker image:
+4. Build the jar for the Spring boot application and then build the docker image:
 ```
-./gradlew  build && docker build . -t json-exporter-service
+gradle build && docker build . -t json-exporter-service
 ```
 
-4. Finally, run the Spring boot container in tandem with the MySQL container:
+5. Finally, run the Spring boot container in tandem with the MySQL container:
 ```
 docker run -p 9000:9000 --name json-exporter-service --link docker-mysql:mysql -d json-exporter-service
 ```
 
-5. You may choose to view the logs and see if the server has booted up:
+6. You may choose to view the logs and see if the server has booted up:
 ```
 docker logs json-exporter-service
 ```
