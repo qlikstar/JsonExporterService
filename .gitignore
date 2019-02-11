@@ -1,8 +1,6 @@
 .gradle
 /build/
 /uploads
-gradle/
-gradlew.bat
 settings.gradle
 !gradle/wrapper/gradle-wrapper.jar
 
